@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
-@Table(name = "recyling_tips")
+@Table(name = "recycling_tips")
 public class RecyclingTip {
 
     @Id
@@ -59,8 +59,4 @@ public class RecyclingTip {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
-    
 }
