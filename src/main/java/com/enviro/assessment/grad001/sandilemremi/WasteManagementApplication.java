@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.sandilem.remi;
+package com.enviro.assessment.grad001.sandilemremi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

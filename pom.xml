@@ -8,8 +8,8 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.enviro.assessment.grad001.sandilemremi</groupId>
+	<artifactId>waste-management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>waste-management</name>
 	<description>Graduate Java Developer Assessment</description>
