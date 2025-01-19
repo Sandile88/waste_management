@@ -1,48 +1,61 @@
 package com.enviro.assessment.grad001.sandilemremi.services.guideline;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.enviro.assessment.grad001.sandilemremi.model.DisposalGuideline;
+import com.enviro.assessment.grad001.sandilemremi.repository.DisposalGuidelineRepository;
 
 @Service
 public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
+    private final DisposalGuidelineRepository disposalGuidelineRepository;
+
+    public DisposalGuidelineSvcImpl(DisposalGuidelineRepository disposalGuidelineRepository) {
+        this.disposalGuidelineRepository = disposalGuidelineRepository;
+    }
+
     @Override
     public List<DisposalGuideline> getAllGuidelines() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllGuidelines'");
+       return disposalGuidelineRepository.findAll();
     }
 
     @Override
-    public DisposalGuideline getSpecificGuideline(Long guidelineId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSpecificGuideline'");
+    public Optional<DisposalGuideline> getSpecificGuideline(Long guidelineId) {
+       return disposalGuidelineRepository.findById(guidelineId);
     }
 
+    // to be fixed
     @Override
     public DisposalGuideline getGuidelineByCategory(Long categoryId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGuidelineByCategory'");
+        throw new UnsupportedOperationException();
+    //    return disposalGuidelineRepository.findById(categoryId);
     }
 
     @Override
     public DisposalGuideline createGuideline(DisposalGuideline disposalGuideline) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createGuideline'");
+       return disposalGuidelineRepository.save(disposalGuideline);
     }
 
     @Override
     public DisposalGuideline updateGuideline(Long guidelineId, DisposalGuideline updatedGuideline) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateGuideline'");
+        if (disposalGuidelineRepository.existsById(guidelineId)) {
+            return disposalGuidelineRepository.save(updatedGuideline);
+
+        } else {
+        throw new RuntimeException("Waste Category with ID: " + guidelineId + " could not be found");
+        }
     }
 
+    // to be fixed
     @Override
     public DisposalGuideline deleteGuideline(Long guidelineId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteGuideline'");
+        throw new UnsupportedOperationException();
+
+        // return disposalGuidelineRepository.delete((findById(guidelineId)));
+
     }
 
 }

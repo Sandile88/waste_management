@@ -1,42 +1,53 @@
 package com.enviro.assessment.grad001.sandilemremi.services.category;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
+import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 
 @Service
 public class WasteCategorySvcImpl implements WasteCategorySvc {
 
-    @Override
-    public List<WasteCategory> getAllWasteCategory() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllWasteCategory'");
+    private final WasteCategoryRepository wasteCategoryRepository;
+    
+    public WasteCategorySvcImpl(WasteCategoryRepository wasteCategoryRepository){
+        this.wasteCategoryRepository = wasteCategoryRepository;
     }
 
     @Override
-    public WasteCategory getSpecificCategory(Long categoryId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSpecifiCategory'");
+    public List<WasteCategory> getAllWasteCategory() {
+        return wasteCategoryRepository.findAll();
+    }
+
+    @Override
+    public Optional<WasteCategory> getSpecificCategory(Long categoryId) {
+       return wasteCategoryRepository.findById(categoryId);
     }
 
     @Override
     public WasteCategory createCategory(WasteCategory wasteCategory) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createCategory'");
+        return wasteCategoryRepository.save(wasteCategory);
     }
 
     @Override
     public WasteCategory updateCategory(Long categoryId, WasteCategory updatedWasteCategory) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCategory'");
+       if (wasteCategoryRepository.existsById(categoryId)) {
+        return wasteCategoryRepository.save(updatedWasteCategory);
+
+       } else {
+        throw new RuntimeException("Waste Category with ID: " + categoryId + " could not be found");
+       }
     }
 
+    // to be fixed
     @Override
     public WasteCategory deleteCategory(Long categoryId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteCategory'");
+        throw new UnsupportedOperationException();
+
+    //    return wasteCategoryRepository.delete((findById(categoryId)));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.enviro.assessment.grad001.sandilemremi.services.recycling;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.enviro.assessment.grad001.sandilemremi.model.RecyclingTip;
 
@@ -8,7 +9,7 @@ public interface RecyclingTipSvc {
 
     public List<RecyclingTip> getAllRecyclingTips();
 
-    public RecyclingTip getSpecificTip(Long tipId);
+    public Optional<RecyclingTip> getSpecificTip(Long tipId);
 
     public RecyclingTip getTipByCategory(Long categoryId);
 
