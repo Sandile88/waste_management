@@ -17,7 +17,7 @@ public interface DisposalGuidelineSvc {
 
     public DisposalGuideline updateGuideline(Long guidelineId, DisposalGuideline updatedGuideline);
 
-    public DisposalGuideline deleteGuideline(Long guidelineId);
+    void deleteGuideline(Long guidelineId);
 
     
 }

@@ -52,7 +52,7 @@ public class RecyclingTipSvcImpl implements RecyclingTipSvc {
 
     // to be fixed
     @Override
-    public RecyclingTip deleteTip(Long tipId) {
+    public void deleteTip(Long tipId) {
         throw new UnsupportedOperationException();
 
         // return recyclingTipRepository.delete((findById(tipId)));

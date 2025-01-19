@@ -7,7 +7,7 @@ import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 
 public interface WasteCategorySvc {
 
-    public List<WasteCategory> getAllWasteCategory();
+    public List<WasteCategory> getAllCategories();
 
     public Optional<WasteCategory> getSpecificCategory(Long categoryId);
 
@@ -15,5 +15,5 @@ public interface WasteCategorySvc {
 
     public WasteCategory updateCategory(Long categoryId, WasteCategory updatedWasteCategory);
 
-    public WasteCategory deleteCategory(Long categoryId);
+    void deleteCategory(Long categoryId);
 }

@@ -18,7 +18,7 @@ public class WasteCategorySvcImpl implements WasteCategorySvc {
     }
 
     @Override
-    public List<WasteCategory> getAllWasteCategory() {
+    public List<WasteCategory> getAllCategories() {
         return wasteCategoryRepository.findAll();
     }
 
@@ -44,7 +44,7 @@ public class WasteCategorySvcImpl implements WasteCategorySvc {
 
     // to be fixed
     @Override
-    public WasteCategory deleteCategory(Long categoryId) {
+    public void deleteCategory(Long categoryId) {
         throw new UnsupportedOperationException();
 
     //    return wasteCategoryRepository.delete((findById(categoryId)));

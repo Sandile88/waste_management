@@ -51,7 +51,7 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
     // to be fixed
     @Override
-    public DisposalGuideline deleteGuideline(Long guidelineId) {
+    public void deleteGuideline(Long guidelineId) {
         throw new UnsupportedOperationException();
 
         // return disposalGuidelineRepository.delete((findById(guidelineId)));

@@ -17,6 +17,6 @@ public interface RecyclingTipSvc {
 
     public RecyclingTip updateTip(Long tipId, RecyclingTip updatedTip);
 
-    public RecyclingTip deleteTip(Long tipId);
+    void deleteTip(Long tipId);
 
 }
