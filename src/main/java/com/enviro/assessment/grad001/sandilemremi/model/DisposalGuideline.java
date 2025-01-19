@@ -2,6 +2,7 @@ package com.enviro.assessment.grad001.sandilemremi.model;
 
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class DisposalGuideline {
     @Column(name = "title")
     private String title;
 
+    @JsonBackReference //to break circular reference
     @ManyToOne
     @JoinColumn(name = "waste_category_id")
     private WasteCategory wasteCategory;

@@ -20,6 +20,7 @@ public class WasteCategory {
     @Column(name = "description")
     private String description;
 
+    @JsonManagedReference //to break circular reference
     @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<DisposalGuideline> guidelines;
 
@@ -29,7 +30,7 @@ public class WasteCategory {
 
     
     // getters and setters
-     public Long getId() {
+    public Long getId() {
         return id;
     }
 

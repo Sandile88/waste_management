@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.enviro.assessment.grad001.sandilemremi.model.DisposalGuideline;
+import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.repository.DisposalGuidelineRepository;
 import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 
@@ -13,10 +14,11 @@ import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryReposi
 public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
     private final DisposalGuidelineRepository disposalGuidelineRepository;
-    // private final WasteCategoryRepository wasteCategoryRepository;
+    private final WasteCategoryRepository wasteCategoryRepository;
 
-    public DisposalGuidelineSvcImpl(DisposalGuidelineRepository disposalGuidelineRepository) {
+    public DisposalGuidelineSvcImpl(DisposalGuidelineRepository disposalGuidelineRepository, WasteCategoryRepository wasteCategoryRepository) {
         this.disposalGuidelineRepository = disposalGuidelineRepository;
+        this.wasteCategoryRepository = wasteCategoryRepository;
     }
 
     @Override
@@ -37,6 +39,12 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
     @Override
     public DisposalGuideline createGuideline(DisposalGuideline disposalGuideline) {
+        if (disposalGuideline.getWasteCategory() != null && disposalGuideline.getWasteCategory().getId() != null) {
+            WasteCategory category = wasteCategoryRepository.findById(disposalGuideline.getWasteCategory().getId())
+            .orElseThrow(() -> new RuntimeException("Category not found with ID: " +
+                disposalGuideline.getWasteCategory().getId()));
+            disposalGuideline.setWasteCategory(category);
+        }
        return disposalGuidelineRepository.save(disposalGuideline);
     }
 
@@ -49,6 +57,12 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
             existingGuideline.setDosList(updatedGuideline.getDosList());
             existingGuideline.setDontsList(updatedGuideline.getDontsList());
 
+            if (updatedGuideline.getWasteCategory() != null && updatedGuideline.getWasteCategory().getId() != null) {
+                WasteCategory category = wasteCategoryRepository.findById(updatedGuideline.getWasteCategory().getId())
+                .orElseThrow(() -> new RuntimeException("Category not found with ID: " +
+                    updatedGuideline.getWasteCategory().getId()));
+                existingGuideline.setWasteCategory(category);
+            }
             return disposalGuidelineRepository.save(existingGuideline);
         })
         .orElseThrow(() -> new RuntimeException("Guideline not found with ID: " + guidelineId));
