@@ -15,8 +15,8 @@ public class RecyclingTip {
     private String title;
 
     @ManyToOne()
-    @JoinColumn(name = "waste_category_id", nullable = false)
-    private WasteCategory wasteCategoryId;
+    @JoinColumn(name = "waste_category_id")
+    private WasteCategory wasteCategory;
 
     // @Column(name = "description")
     private String description;
@@ -41,12 +41,12 @@ public class RecyclingTip {
     }
 
 
-    public WasteCategory getWasteCategoryId() {
-        return wasteCategoryId;
+    public WasteCategory getWasteCategory() {
+        return wasteCategory;
     }
 
-    public void setWasteCategoryId(WasteCategory wasteCategoryId) {
-        this.wasteCategoryId = wasteCategoryId;
+    public void setWasteCategory(WasteCategory wasteCategory) {
+        this.wasteCategory = wasteCategory;
     }
 
 

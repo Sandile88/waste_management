@@ -11,7 +11,7 @@ public interface RecyclingTipSvc {
 
     public Optional<RecyclingTip> getSpecificTip(Long tipId);
 
-    public RecyclingTip getTipByCategory(Long categoryId);
+    public List<RecyclingTip> getTipByCategory(Long categoryId);
 
     public RecyclingTip createTip(RecyclingTip recyclingTip);
 

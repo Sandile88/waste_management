@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,13 +36,13 @@ public class RecyclingTipController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{tipId}")
     public ResponseEntity<Optional<RecyclingTip>> getSpecificTip(@PathVariable Long tipId) {
         return ResponseEntity.ok(recyclingTipSvc.getSpecificTip(tipId));
     }
 
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity<RecyclingTip> getTipByCategory(@PathVariable Long tipId) {
+    @GetMapping("/category/{tipId}")
+    public ResponseEntity<List<RecyclingTip>> getTipByCategory(@PathVariable Long tipId) {
         return ResponseEntity.ok(recyclingTipSvc.getTipByCategory(tipId));
     }
 
@@ -53,12 +52,12 @@ public class RecyclingTipController {
        
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{tipId}")
     public ResponseEntity<RecyclingTip> updateTip(@PathVariable Long tipId, @RequestBody RecyclingTip recyclingTip) {
         return new ResponseEntity<>(recyclingTipSvc.updateTip(tipId, recyclingTip), HttpStatus.OK);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{tipId}")
     public ResponseEntity<Void> deleteTip(@PathVariable Long tipId) {
         recyclingTipSvc.deleteTip(tipId);
         return ResponseEntity.noContent().build();

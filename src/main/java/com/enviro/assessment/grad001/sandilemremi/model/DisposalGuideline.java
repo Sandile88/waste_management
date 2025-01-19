@@ -2,7 +2,6 @@ package com.enviro.assessment.grad001.sandilemremi.model;
 
 
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -17,16 +16,20 @@ public class DisposalGuideline {
     private String title;
 
     @ManyToOne()
-    @JoinColumn(name = "waste_category_id", nullable = false)
-    private WasteCategory wasteCategoryId;
+    @JoinColumn(name = "waste_category_id")
+    private WasteCategory wasteCategory;
 
     @ElementCollection
+    @CollectionTable(name = "dos_list", joinColumns = @JoinColumn(name = "guideline_id"))
+    @Column(name = "dos")
     private List<String> dosList;
 
     @ElementCollection
+    @CollectionTable(name = "donts_list", joinColumns = @JoinColumn(name = "guideline_id"))
+    @Column(name = "donts")
     private List<String> dontsList;
 
-    // @Column(name = "instructions")
+    @Column(name = "instructions")
     private String instructions;
 
 
@@ -49,12 +52,12 @@ public class DisposalGuideline {
     }
 
 
-    public WasteCategory getWasteCategoryId() {
-        return wasteCategoryId;
+    public WasteCategory getWasteCategory() {
+        return wasteCategory;
     }
 
-    public void setWasteCategoryId(WasteCategory wasteCategoryId) {
-        this.wasteCategoryId = wasteCategoryId;
+    public void setWasteCategory(WasteCategory wasteCategory) {
+        this.wasteCategory = wasteCategory;
     }
 
 
@@ -83,7 +86,4 @@ public class DisposalGuideline {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
-
-
-    
 }

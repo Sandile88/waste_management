@@ -28,10 +28,9 @@ public class RecyclingTipSvcImpl implements RecyclingTipSvc {
         
     }
 
-    // to be fixed
     @Override
-    public RecyclingTip getTipByCategory(Long categoryId) {
-        throw new UnsupportedOperationException();
+    public List<RecyclingTip> getTipByCategory(Long categoryId) {
+        return recyclingTipRepository.findByWasteCategoryId(categoryId);
     }
 
     @Override
@@ -41,21 +40,24 @@ public class RecyclingTipSvcImpl implements RecyclingTipSvc {
 
     @Override
     public RecyclingTip updateTip(Long tipId, RecyclingTip updatedTip) {
-        if (recyclingTipRepository.existsById(tipId)) {
-            return recyclingTipRepository.save(updatedTip);
-
-        } else {
-        throw new RuntimeException("Waste Category with ID: " + tipId + " could not be found");
-        }
+       return recyclingTipRepository.findById(tipId)
+       .map(existingTip -> {
+        existingTip.setTitle(updatedTip.getTitle());
+        existingTip.setDescription(updatedTip.getDescription());
+        
+        return recyclingTipRepository.save(existingTip);
+       })
+       .orElseThrow(() -> new RuntimeException("Recycling tip not found with ID: " + tipId));
     }
     
 
-    // to be fixed
     @Override
     public void deleteTip(Long tipId) {
-        throw new UnsupportedOperationException();
-
-        // return recyclingTipRepository.delete((findById(tipId)));
+       if (recyclingTipRepository.existsById(tipId)) {
+        recyclingTipRepository.deleteById(tipId);
+       } else {
+        throw new RuntimeException("Recyling Tip with ID: " + tipId + " could not be found");
+       }
     }
 
 }

@@ -34,20 +34,24 @@ public class WasteCategorySvcImpl implements WasteCategorySvc {
 
     @Override
     public WasteCategory updateCategory(Long categoryId, WasteCategory updatedWasteCategory) {
-       if (wasteCategoryRepository.existsById(categoryId)) {
-        return wasteCategoryRepository.save(updatedWasteCategory);
+       return wasteCategoryRepository.findById(categoryId)
+       .map(existingCategory -> {
+        existingCategory.setName(updatedWasteCategory.getName());
+        existingCategory.setDescription(updatedWasteCategory.getDescription());
 
-       } else {
-        throw new RuntimeException("Waste Category with ID: " + categoryId + " could not be found");
-       }
+        return wasteCategoryRepository.save(existingCategory);
+       })
+       .orElseThrow(() -> new RuntimeException("Category not found with ID: " + categoryId));
     }
 
-    // to be fixed
     @Override
     public void deleteCategory(Long categoryId) {
-        throw new UnsupportedOperationException();
+       if(wasteCategoryRepository.existsById(categoryId)) {
+        wasteCategoryRepository.deleteById(categoryId);
+       } else {
+        throw new RuntimeException("Waste Category with ID: " + categoryId + " could not be found");
 
-    //    return wasteCategoryRepository.delete((findById(categoryId)));
+       }
     }
 
 }

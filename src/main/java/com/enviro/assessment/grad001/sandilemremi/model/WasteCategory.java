@@ -3,7 +3,6 @@ package com.enviro.assessment.grad001.sandilemremi.model;
 
 
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -17,13 +16,13 @@ public class WasteCategory {
     @Column(name = "name")
     private String name;
 
-    // @Column(name = "description")
+    @Column(name = "description")
     private String description;
 
-    // @OneToMany(mappedBy = "wasteCategory")
+    @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<DisposalGuideline> guidelines;
 
-    // @OneToMany(mappedBy = "wasteCategory")
+    @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<RecyclingTip> recyclingTips;
 
     

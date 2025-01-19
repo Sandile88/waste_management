@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +35,7 @@ public class WasteCategoryController {
         return ResponseEntity.ok(wasteCategorySvc.getAllCategories());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{categoryId}")
     public ResponseEntity<Optional<WasteCategory>> getSpecificCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(wasteCategorySvc.getSpecificCategory(categoryId));
     }
@@ -46,13 +45,13 @@ public class WasteCategoryController {
         return new ResponseEntity<>(wasteCategorySvc.createCategory(wasteCategory), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{categoryId}")
     public ResponseEntity<WasteCategory> updateCategory(@PathVariable Long categoryId, @RequestBody WasteCategory wasteCategory) {
         return new ResponseEntity<>(wasteCategorySvc.updateCategory(categoryId, wasteCategory), HttpStatus.OK);
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{categoryId}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long categoryId) {
         wasteCategorySvc.deleteCategory(categoryId);
         return ResponseEntity.noContent().build();

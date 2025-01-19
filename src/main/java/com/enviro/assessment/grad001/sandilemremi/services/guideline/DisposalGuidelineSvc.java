@@ -11,7 +11,7 @@ public interface DisposalGuidelineSvc {
 
     public Optional<DisposalGuideline> getSpecificGuideline(Long guidelineId);
 
-    public DisposalGuideline getGuidelineByCategory(Long categoryId);
+    public List<DisposalGuideline> getGuidelineByCategory(Long categoryId);
 
     public DisposalGuideline createGuideline(DisposalGuideline disposalGuideline);
 

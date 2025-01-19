@@ -27,11 +27,10 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
        return disposalGuidelineRepository.findById(guidelineId);
     }
 
-    // to be fixed
     @Override
-    public DisposalGuideline getGuidelineByCategory(Long categoryId) {
-        throw new UnsupportedOperationException();
-    //    return disposalGuidelineRepository.findById(categoryId);
+    public List<DisposalGuideline> getGuidelineByCategory(Long categoryId) {
+        return disposalGuidelineRepository.findByWasteCategoryId(categoryId);
+
     }
 
     @Override
@@ -41,20 +40,26 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
     @Override
     public DisposalGuideline updateGuideline(Long guidelineId, DisposalGuideline updatedGuideline) {
-        if (disposalGuidelineRepository.existsById(guidelineId)) {
-            return disposalGuidelineRepository.save(updatedGuideline);
+        return disposalGuidelineRepository.findById(guidelineId)
+        .map(existingGuideline -> {
+            existingGuideline.setTitle(updatedGuideline.getTitle());
+            existingGuideline.setInstructions(updatedGuideline.getInstructions());
+            existingGuideline.setDosList(updatedGuideline.getDosList());
+            existingGuideline.setDontsList(updatedGuideline.getDontsList());
 
-        } else {
-        throw new RuntimeException("Waste Category with ID: " + guidelineId + " could not be found");
-        }
+            return disposalGuidelineRepository.save(existingGuideline);
+        })
+        .orElseThrow(() -> new RuntimeException("Guideline not found with ID: " + guidelineId));
     }
 
-    // to be fixed
     @Override
     public void deleteGuideline(Long guidelineId) {
-        throw new UnsupportedOperationException();
+        if(disposalGuidelineRepository.existsById(guidelineId)) {
+            disposalGuidelineRepository.deleteById(guidelineId);
+        } else {
+            throw new RuntimeException("Disposal Guideline with ID: " + guidelineId + " could not be found");
 
-        // return disposalGuidelineRepository.delete((findById(guidelineId)));
+        }
 
     }
 
