@@ -15,7 +15,7 @@ public class DisposalGuideline {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "waste_category_id")
     private WasteCategory wasteCategory;
 

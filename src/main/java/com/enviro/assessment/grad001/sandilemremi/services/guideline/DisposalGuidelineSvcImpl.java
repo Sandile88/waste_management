@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.enviro.assessment.grad001.sandilemremi.model.DisposalGuideline;
 import com.enviro.assessment.grad001.sandilemremi.repository.DisposalGuidelineRepository;
+import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 
 @Service
 public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
     private final DisposalGuidelineRepository disposalGuidelineRepository;
+    // private final WasteCategoryRepository wasteCategoryRepository;
 
     public DisposalGuidelineSvcImpl(DisposalGuidelineRepository disposalGuidelineRepository) {
         this.disposalGuidelineRepository = disposalGuidelineRepository;

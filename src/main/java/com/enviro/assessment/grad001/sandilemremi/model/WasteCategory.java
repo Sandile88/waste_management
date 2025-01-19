@@ -3,6 +3,7 @@ package com.enviro.assessment.grad001.sandilemremi.model;
 
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +23,7 @@ public class WasteCategory {
     @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<DisposalGuideline> guidelines;
 
+    @JsonManagedReference //to break circular reference
     @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<RecyclingTip> recyclingTips;
 

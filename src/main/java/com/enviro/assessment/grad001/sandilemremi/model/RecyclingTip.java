@@ -2,6 +2,8 @@ package com.enviro.assessment.grad001.sandilemremi.model;
 
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "recyling_tips")
@@ -14,11 +16,11 @@ public class RecyclingTip {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne()
+    @JsonBackReference //to break circular reference
+    @ManyToOne
     @JoinColumn(name = "waste_category_id")
     private WasteCategory wasteCategory;
 
-    // @Column(name = "description")
     private String description;
 
 
