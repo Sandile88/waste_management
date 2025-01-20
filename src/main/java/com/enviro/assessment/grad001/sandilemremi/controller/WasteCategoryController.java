@@ -1,7 +1,10 @@
 package com.enviro.assessment.grad001.sandilemremi.controller;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.services.category.WasteCategorySvc;
@@ -17,33 +20,41 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * Controller for handling waste category requests
+ * Provides RESTful CRUD endpoints for managing waste categories,
+ */
 
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class WasteCategoryController {
     private final WasteCategorySvc wasteCategorySvc;
+
 
     public WasteCategoryController(WasteCategorySvc wasteCategorySvc) {
         this.wasteCategorySvc = wasteCategorySvc;
     }
+
 
     @GetMapping
     public ResponseEntity<List<WasteCategory>> getAllCategories() {
         return ResponseEntity.ok(wasteCategorySvc.getAllCategories());
     }
 
+
     @GetMapping("/{categoryId}")
     public ResponseEntity<Optional<WasteCategory>> getSpecificCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(wasteCategorySvc.getSpecificCategory(categoryId));
     }
 
+
     @PostMapping
     public ResponseEntity<WasteCategory> createCategory(@RequestBody WasteCategory wasteCategory) {
         return new ResponseEntity<>(wasteCategorySvc.createCategory(wasteCategory), HttpStatus.CREATED);
     }
+
 
     @PutMapping("/{categoryId}")
     public ResponseEntity<WasteCategory> updateCategory(@PathVariable Long categoryId, @RequestBody WasteCategory wasteCategory) {
@@ -56,7 +67,4 @@ public class WasteCategoryController {
         wasteCategorySvc.deleteCategory(categoryId);
         return ResponseEntity.noContent().build();
     }
-    
-    
-    
 }

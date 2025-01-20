@@ -1,10 +1,9 @@
 package com.enviro.assessment.grad001.sandilemremi.servicesTests;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-// import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.*;
-
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +22,7 @@ import com.enviro.assessment.grad001.sandilemremi.repository.DisposalGuidelineRe
 import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 import com.enviro.assessment.grad001.sandilemremi.services.guideline.DisposalGuidelineSvcImpl;
 
+
 @ExtendWith(MockitoExtension.class)
 public class DisposalGuidelineSvcImplTest {
     
@@ -38,6 +38,7 @@ public class DisposalGuidelineSvcImplTest {
     private DisposalGuideline disposalGuideline;
     private WasteCategory category;
 
+    
     @BeforeEach
     void setUp() {
         category = new WasteCategory();
@@ -47,7 +48,7 @@ public class DisposalGuidelineSvcImplTest {
         disposalGuideline = new DisposalGuideline();
         disposalGuideline.setId(1L);
         disposalGuideline.setTitle("Paper Recycling Guide");
-        disposalGuideline.setInstructions("Proper paper disposal methods\"");
+        disposalGuideline.setInstructions("Proper paper disposal methods");
         disposalGuideline.setDosList(Arrays.asList("Remove staples", "Keep paper dry", "Bundle similar types together"));
         disposalGuideline.setDontsList(Arrays.asList("Don't include greasy paper", "Don't mix with plastic", "Don't include thermal paper"));
         disposalGuideline.setWasteCategory(category);
@@ -59,7 +60,6 @@ public class DisposalGuidelineSvcImplTest {
         when(disposalGuidelineRepository.findAll()).thenReturn(expectedGuidelines);
 
         List<DisposalGuideline> actualGuidelines = disposalGuidelineSvc.getAllGuidelines();
-
         assertEquals(expectedGuidelines, actualGuidelines);
         verify(disposalGuidelineRepository).findAll();
     }
@@ -69,7 +69,6 @@ public class DisposalGuidelineSvcImplTest {
         when(disposalGuidelineRepository.findById(1L)).thenReturn(Optional.of(disposalGuideline));
 
         Optional<DisposalGuideline> result = disposalGuidelineSvc.getSpecificGuideline(1L);
-
         assertTrue(result.isPresent());
         assertEquals(disposalGuideline, result.get());
         verify(disposalGuidelineRepository).findById(1L);

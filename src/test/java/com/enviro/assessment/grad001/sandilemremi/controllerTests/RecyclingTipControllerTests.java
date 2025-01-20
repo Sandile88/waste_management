@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.controllerTests;
 
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -22,6 +23,7 @@ import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.services.recycling.RecyclingTipSvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 @WebMvcTest(RecyclingTipController.class)
 public class RecyclingTipControllerTests {
 
@@ -36,6 +38,7 @@ public class RecyclingTipControllerTests {
     
     private RecyclingTip testTip;
     private WasteCategory testCategory;
+
 
     @BeforeEach
     void setUp() {
@@ -56,17 +59,18 @@ public class RecyclingTipControllerTests {
         List<RecyclingTip> tips = Collections.singletonList(testTip);
         when(recyclingTipSvc.getTipByCategory(1L)).thenReturn(tips);
 
-        mockMvc.perform(get("/tips/category/1"))
+        mockMvc.perform(get("/api/tips/category/1"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].id").value(1))
             .andExpect(jsonPath("$[0].title").value("Efficient Plastic Recycling"));
     }
 
+    
     @Test
     void testCreateTip() throws Exception {
         when(recyclingTipSvc.createTip(any(RecyclingTip.class))).thenReturn(testTip);
 
-        mockMvc.perform(post("/tips")
+        mockMvc.perform(post("/api/tips")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(testTip)))
             .andExpect(status().isCreated())

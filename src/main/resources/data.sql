@@ -10,6 +10,12 @@ INSERT INTO disposal_guidelines (title, instructions, waste_category_id) VALUES
     ('Organic Waste Disposal Guide', 'Guide for composting and disposing of organic waste.', 2),
     ('Metal Recycling Guide', 'Proper methods for disposing of metal products.', 3);
 
+-- sample data for Recycling Tips
+INSERT INTO recycling_tips (title, description, waste_category_id) VALUES
+    ('Plastic Recycling', 'Always check the recycling symbols on plastics to ensure they are recyclable.', 1),
+    ('Composting', 'Using a compost bin can significantly reduce the volume of waste sent to landfills.', 2),
+    ('Metal Disposal', 'Batteries and certain metals require special disposal methods; check local guidelines.', 3);
+    
 -- splitting the do and dont list into separate statements because of their @ElementCollection annotation
 
 -- dos list items for Plastic
@@ -47,9 +53,3 @@ INSERT INTO donts_list (guideline_id, donts) VALUES
     (3, 'Don''t include metal that is too large.'),
     (3, 'Don''t mix with hazardous waste.'),
     (3, 'Don''t recycle any metal that is not clean.');
-
--- sample data for Recycling Tips
-INSERT INTO recycling_tips (title, description, waste_category_id) VALUES
-    ('Plastic Recycling', 'Always check the recycling symbols on plastics to ensure they are recyclable.', 1),
-    ('Composting', 'Using a compost bin can significantly reduce the volume of waste sent to landfills.', 2),
-    ('Metal Disposal', 'Batteries and certain metals require special disposal methods; check local guidelines.', 3);

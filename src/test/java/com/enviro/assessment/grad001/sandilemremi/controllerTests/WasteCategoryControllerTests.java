@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.controllerTests;
 
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -22,13 +23,16 @@ import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.services.category.WasteCategorySvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 @WebMvcTest(WasteCategoryController.class)
 public class WasteCategoryControllerTests {
+
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
     private WasteCategorySvc wasteCategorySvc;
+
 
     @Test
     void testUpdateCategory() throws Exception {
@@ -45,21 +49,21 @@ public class WasteCategoryControllerTests {
     when(wasteCategorySvc.updateCategory(eq(1L), any(WasteCategory.class)))
             .thenReturn(updatedCategory);
 
-    mockMvc.perform(put("/categories/{categoryId}", 1L)
+    mockMvc.perform(put("/api/categories/{categoryId}", 1L)
             .contentType(MediaType.APPLICATION_JSON)
             .content(new ObjectMapper().writeValueAsString(updatedCategory)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("Paper Recycling"))
             .andExpect(jsonPath("$.description").value("How to recycle paper at home"));
-}
+    }
 
 
     @Test 
     void testDeleteCategory() throws Exception {
         doNothing().when(wasteCategorySvc).deleteCategory(1L);
 
-        mockMvc.perform(delete("/categories/{categoryId}", 1L))
+        mockMvc.perform(delete("/api/categories/{categoryId}", 1L))
             .andExpect(status().isNoContent());
     }
 }

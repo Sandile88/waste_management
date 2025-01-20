@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.controllerTests;
 
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -18,14 +19,17 @@ import com.enviro.assessment.grad001.sandilemremi.services.guideline.DisposalGui
 import java.util.Arrays;
 import java.util.Optional;
 
+
 @WebMvcTest(DisposalGuidelineController.class)
 public class DisposalGuidelineControllerTests {
+
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
     private DisposalGuidelineSvc disposalGuidelineSvc;
 
+    
     @Test
     void testRetrivingAllGuidelines() throws Exception {
         DisposalGuideline guide1 = new DisposalGuideline();
@@ -39,7 +43,7 @@ public class DisposalGuidelineControllerTests {
         when(disposalGuidelineSvc.getAllGuidelines())
             .thenReturn(Arrays.asList(guide1, guide2));
 
-        mockMvc.perform(get("/guidelines"))
+        mockMvc.perform(get("/api/guidelines"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.length()").value(2))
             .andExpect(jsonPath("$[0].id").value(1))
@@ -55,7 +59,7 @@ public class DisposalGuidelineControllerTests {
         when(disposalGuidelineSvc.getSpecificGuideline(1L))
             .thenReturn(Optional.of(guide));
 
-        mockMvc.perform(get("/guidelines/1"))
+        mockMvc.perform(get("/api/guidelines/1"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").value(1))
             .andExpect(jsonPath("$.title").value("Plastic Bottle Disposal Guide"));

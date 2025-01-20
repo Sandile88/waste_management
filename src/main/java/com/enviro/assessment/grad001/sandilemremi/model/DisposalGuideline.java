@@ -5,6 +5,15 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+
+/**
+ * Represents a disposal guideline for waste management.
+ *
+ * This entity holds the information related to guidelines for disposing of specific types of waste.
+ * Each guideline is associated with a waste category and contains instructions, dos and don'ts.
+ */
+
+
 @Entity
 @Table(name = "disposal_guidelines")
 public class DisposalGuideline {
@@ -16,7 +25,7 @@ public class DisposalGuideline {
     @Column(name = "title")
     private String title;
 
-    @JsonBackReference //to break circular reference
+    @JsonBackReference      //to break circular reference
     @ManyToOne
     @JoinColumn(name = "waste_category_id")
     private WasteCategory wasteCategory;

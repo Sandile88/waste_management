@@ -1,11 +1,13 @@
 package com.enviro.assessment.grad001.sandilemremi.modelTests;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import com.enviro.assessment.grad001.sandilemremi.model.RecyclingTip;
 import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
+
 
 public class RecyclingTipModelTests {
 
@@ -15,10 +17,10 @@ public class RecyclingTipModelTests {
         assertNotNull(tip);
     }
 
+
     @Test
     void testRecyclingTipObj() {
         RecyclingTip tip = new RecyclingTip();
-
         tip.setId(1L);
         tip.setTitle("Glass Recycling Tip");
         tip.setDescription("Always rinse glass jars and bottles before recycling.");

@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.servicesTests;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +24,7 @@ import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 import com.enviro.assessment.grad001.sandilemremi.services.category.WasteCategorySvcImpl;
 
+
 @ExtendWith(MockitoExtension.class)
 public class WasteCategorySvcImplTests {
     
@@ -31,6 +33,7 @@ public class WasteCategorySvcImplTests {
     
     private WasteCategorySvcImpl wasteCategorySvcImpl;
     private WasteCategory wasteCategory;
+    
     
     @BeforeEach
     void setUp() {
@@ -46,6 +49,7 @@ public class WasteCategorySvcImplTests {
         wasteCategory.setRecyclingTips(recyclingTips);        
     }
 
+
     @Test
     void testUpdateCategory() {
         WasteCategory updatedCategory = new WasteCategory();
@@ -56,12 +60,12 @@ public class WasteCategorySvcImplTests {
         when(wasteCategoryRepository.save(any(WasteCategory.class))).thenReturn(wasteCategory);
         
         WasteCategory result = wasteCategorySvcImpl.updateCategory(1L, updatedCategory);
-        
         assertEquals("Metal Recycling", result.getName());
         assertEquals("Includes aluminum cans, steel, and scrap metal.", result.getDescription());
         verify(wasteCategoryRepository).findById(1L);
         verify(wasteCategoryRepository).save(any(WasteCategory.class));
     }
+
 
     @Test
     void testUpdateInvalidCategoryId() {
@@ -72,15 +76,16 @@ public class WasteCategorySvcImplTests {
         verify(wasteCategoryRepository, never()).save(any(WasteCategory.class));
     }
 
+
     @Test
     void testDeleteCategory() {
         when(wasteCategoryRepository.existsById(1L)).thenReturn(true);
         
         wasteCategorySvcImpl.deleteCategory(1L);
-        
         verify(wasteCategoryRepository).existsById(1L);
         verify(wasteCategoryRepository).deleteById(1L);
     }
+
 
     @Test
     void testDeleteInvalidCategoryId() {

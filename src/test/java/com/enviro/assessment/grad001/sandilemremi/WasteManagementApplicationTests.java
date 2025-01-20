@@ -9,5 +9,4 @@ class WasteManagementApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

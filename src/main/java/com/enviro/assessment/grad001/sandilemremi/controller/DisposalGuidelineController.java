@@ -20,31 +20,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+/**
+ * Controller for handling disposal guideline requests
+ * Provides RESTful CRUD endpoints for managing disposal guidelines,
+ */
+
 
 @RestController
-@RequestMapping("/guidelines")
+@RequestMapping("/api/guidelines")
 public class DisposalGuidelineController {
-
     private final DisposalGuidelineSvc disposalGuidelineSvc;
     
     public DisposalGuidelineController(DisposalGuidelineSvc disposalGuidelineSvc) {
         this.disposalGuidelineSvc = disposalGuidelineSvc;
     }
 
+
     @GetMapping
     public ResponseEntity<List<DisposalGuideline>> getAllGuidelines() {
         return ResponseEntity.ok(disposalGuidelineSvc.getAllGuidelines());
     }
+
 
     @GetMapping("/{guidelineId}")
     public ResponseEntity<Optional<DisposalGuideline>> getSpecificGuideline(@PathVariable Long guidelineId) {
         return ResponseEntity.ok(disposalGuidelineSvc.getSpecificGuideline(guidelineId));
     }
 
+
     @GetMapping("/category/{guidelineId}")
     public ResponseEntity<List<DisposalGuideline>> getGuidelineByCategory(@PathVariable Long guidelineId) {
         return ResponseEntity.ok(disposalGuidelineSvc.getGuidelineByCategory(guidelineId));
     }
+
 
     @PostMapping
     public ResponseEntity<DisposalGuideline> createGuideline(@RequestBody DisposalGuideline disposalGuideline) {
@@ -57,14 +65,10 @@ public class DisposalGuidelineController {
         return new ResponseEntity<>(disposalGuidelineSvc.updateGuideline(guidelineId, disposalGuideline), HttpStatus.OK);
     }
 
+
     @DeleteMapping("/{guidelineId}")
     public ResponseEntity<Void> deleteGuideline(@PathVariable Long guidelineId) {
         disposalGuidelineSvc.deleteGuideline(guidelineId);
         return ResponseEntity.noContent().build();
     }
-   
-    
-   
-    
-
 }

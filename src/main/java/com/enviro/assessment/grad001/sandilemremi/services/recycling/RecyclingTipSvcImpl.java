@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.services.recycling;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,15 @@ import com.enviro.assessment.grad001.sandilemremi.model.RecyclingTip;
 import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.repository.RecyclingTipRepository;
 import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
+
+
+/**
+ * Implementation of the RecyclingTipSvc interface.
+ *
+ * This class provides the concrete implementation of the methods
+ * defined in the RecyclingTipSvc interface for managing recycling tips.
+ */
+
 
 @Service
 public class RecyclingTipSvcImpl implements RecyclingTipSvc {
@@ -22,10 +32,12 @@ public class RecyclingTipSvcImpl implements RecyclingTipSvc {
         this.wasteCategoryRepository = wasteCategoryRepository;
     }
 
+
     @Override
     public List<RecyclingTip> getAllRecyclingTips() {
        return recyclingTipRepository.findAll();
     }
+
 
     @Override
     public Optional<RecyclingTip> getSpecificTip(Long tipId) {
@@ -33,10 +45,12 @@ public class RecyclingTipSvcImpl implements RecyclingTipSvc {
         
     }
 
+
     @Override
     public List<RecyclingTip> getTipByCategory(Long categoryId) {
         return recyclingTipRepository.findByWasteCategoryId(categoryId);
     }
+
 
     @Override
     public RecyclingTip createTip(RecyclingTip recyclingTip) {
@@ -49,32 +63,32 @@ public class RecyclingTipSvcImpl implements RecyclingTipSvc {
       return recyclingTipRepository.save(recyclingTip);
     }
 
+
     @Override
     public RecyclingTip updateTip(Long tipId, RecyclingTip updatedTip) {
        return recyclingTipRepository.findById(tipId)
-       .map(existingTip -> {
-        existingTip.setTitle(updatedTip.getTitle());
-        existingTip.setDescription(updatedTip.getDescription());
+        .map(existingTip -> {
+            existingTip.setTitle(updatedTip.getTitle());
+            existingTip.setDescription(updatedTip.getDescription());
 
-        if(updatedTip.getWasteCategory() != null && updatedTip.getWasteCategory().getId() != null) {
-            WasteCategory category = wasteCategoryRepository.findById(updatedTip.getWasteCategory().getId())
-            .orElseThrow(() -> new RuntimeException("Category not found with ID: " + 
-                updatedTip.getWasteCategory().getId()));
-            existingTip.setWasteCategory(category);
-        }        
-        return recyclingTipRepository.save(existingTip);
-       })
-       .orElseThrow(() -> new RuntimeException("Recycling tip not found with ID: " + tipId));
+            if(updatedTip.getWasteCategory() != null && updatedTip.getWasteCategory().getId() != null) {
+                WasteCategory category = wasteCategoryRepository.findById(updatedTip.getWasteCategory().getId())
+                .orElseThrow(() -> new RuntimeException("Category not found with ID: " + 
+                    updatedTip.getWasteCategory().getId()));
+                existingTip.setWasteCategory(category);
+            }        
+            return recyclingTipRepository.save(existingTip);
+        })
+        .orElseThrow(() -> new RuntimeException("Recycling tip not found with ID: " + tipId));
     }
     
 
     @Override
     public void deleteTip(Long tipId) {
        if (recyclingTipRepository.existsById(tipId)) {
-        recyclingTipRepository.deleteById(tipId);
+            recyclingTipRepository.deleteById(tipId);
        } else {
-        throw new RuntimeException("Recyling Tip with ID: " + tipId + " could not be found");
+            throw new RuntimeException("Recyling Tip with ID: " + tipId + " could not be found");
        }
     }
-
 }

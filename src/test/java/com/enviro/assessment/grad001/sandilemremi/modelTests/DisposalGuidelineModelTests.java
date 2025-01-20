@@ -1,14 +1,15 @@
 package com.enviro.assessment.grad001.sandilemremi.modelTests;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import com.enviro.assessment.grad001.sandilemremi.model.DisposalGuideline;
 import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
+
 
 public class DisposalGuidelineModelTests {
 
@@ -17,6 +18,7 @@ public class DisposalGuidelineModelTests {
         DisposalGuideline guideline = new DisposalGuideline();
         assertNotNull(guideline);
     }
+
 
     @Test
     void testCompleteGuidelineObj() {

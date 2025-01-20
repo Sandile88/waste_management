@@ -1,10 +1,18 @@
 package com.enviro.assessment.grad001.sandilemremi.model;
 
 
-
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+
+/**
+ * Represents a waste category for waste management.
+ *
+ * This entity holds information related to specific types of waste categories.
+ * Each category includes a description and is associated with disposal guidelines and recycling tips.
+ */
+
 
 @Entity
 @Table(name = "waste_categories")
@@ -20,11 +28,11 @@ public class WasteCategory {
     @Column(name = "description")
     private String description;
 
-    @JsonManagedReference //to break circular reference
+    @JsonManagedReference       //to break circular reference
     @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<DisposalGuideline> guidelines;
 
-    @JsonManagedReference //to break circular reference
+    @JsonManagedReference       //to break circular reference
     @OneToMany(mappedBy = "wasteCategory", cascade = CascadeType.ALL)
     private List<RecyclingTip> recyclingTips;
 
@@ -72,10 +80,5 @@ public class WasteCategory {
 
     public void setRecyclingTips(List<RecyclingTip> recyclingTips) {
         this.recyclingTips = recyclingTips;
-    }
-
-
-
-
-    
+    }    
 }

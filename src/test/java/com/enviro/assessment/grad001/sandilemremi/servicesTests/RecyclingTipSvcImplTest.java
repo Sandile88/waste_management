@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.servicesTests;
 
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +22,7 @@ import com.enviro.assessment.grad001.sandilemremi.repository.RecyclingTipReposit
 import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 import com.enviro.assessment.grad001.sandilemremi.services.recycling.RecyclingTipSvcImpl;
 
+
 @ExtendWith(MockitoExtension.class)
 public class RecyclingTipSvcImplTest {
 
@@ -36,6 +38,7 @@ public class RecyclingTipSvcImplTest {
     private RecyclingTip sampleTip;
     private WasteCategory sampleCategory;
 
+
     @BeforeEach
     void setUp() {
         sampleCategory = new WasteCategory();
@@ -49,8 +52,9 @@ public class RecyclingTipSvcImplTest {
         sampleTip.setWasteCategory(sampleCategory);
     }
 
+
     @Test
-    void getTipByCategory_ShouldReturnTipsForCategory() {
+    void getTipByCategory() {
         List<RecyclingTip> expectedTips = Arrays.asList(sampleTip);
         when(recyclingTipRepository.findByWasteCategoryId(1L)).thenReturn(expectedTips);
 
@@ -60,7 +64,7 @@ public class RecyclingTipSvcImplTest {
     }
 
     @Test
-    void createTip_WithValidCategory_ShouldSaveTip() {
+    void createTipWithValidCategory() {
         when(wasteCategoryRepository.findById(1L)).thenReturn(Optional.of(sampleCategory));
         when(recyclingTipRepository.save(any(RecyclingTip.class))).thenReturn(sampleTip);
 
@@ -71,7 +75,7 @@ public class RecyclingTipSvcImplTest {
     }
 
     @Test
-    void createTip_WithInvalidCategory_ShouldThrowException() {
+    void createTipWithInvalidCategory() {
         when(wasteCategoryRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(RuntimeException.class, () -> recyclingTipService.createTip(sampleTip));

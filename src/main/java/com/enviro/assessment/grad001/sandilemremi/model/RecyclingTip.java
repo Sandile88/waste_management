@@ -5,6 +5,14 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
+/**
+ * Represents recycling tips for waste management.
+ *
+ * This entity holds the information related to tips for recycling specific types of waste.
+ * Each tip is associated with a waste category and contains a brief description.
+ */
+
+
 @Entity
 @Table(name = "recycling_tips")
 public class RecyclingTip {
@@ -16,7 +24,7 @@ public class RecyclingTip {
     @Column(name = "title")
     private String title;
 
-    @JsonBackReference //to break circular reference
+    @JsonBackReference      //to break circular reference
     @ManyToOne
     @JoinColumn(name = "waste_category_id")
     private WasteCategory wasteCategory;

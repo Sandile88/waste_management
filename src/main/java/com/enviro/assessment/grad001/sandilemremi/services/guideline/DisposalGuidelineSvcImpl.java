@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.services.guideline;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,32 +11,46 @@ import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
 import com.enviro.assessment.grad001.sandilemremi.repository.DisposalGuidelineRepository;
 import com.enviro.assessment.grad001.sandilemremi.repository.WasteCategoryRepository;
 
+
+/**
+ * Implementation of the DisposalGuidelineSvc interface.
+ *
+ * This class provides the concrete implementation of the methods
+ * defined in the DisposalGuidelineSvc interface for managing disposal guidelines.
+ */
+
+
 @Service
 public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
 
     private final DisposalGuidelineRepository disposalGuidelineRepository;
     private final WasteCategoryRepository wasteCategoryRepository;
 
+
     public DisposalGuidelineSvcImpl(DisposalGuidelineRepository disposalGuidelineRepository, WasteCategoryRepository wasteCategoryRepository) {
         this.disposalGuidelineRepository = disposalGuidelineRepository;
         this.wasteCategoryRepository = wasteCategoryRepository;
     }
+
 
     @Override
     public List<DisposalGuideline> getAllGuidelines() {
        return disposalGuidelineRepository.findAll();
     }
 
+
     @Override
     public Optional<DisposalGuideline> getSpecificGuideline(Long guidelineId) {
        return disposalGuidelineRepository.findById(guidelineId);
     }
+
 
     @Override
     public List<DisposalGuideline> getGuidelineByCategory(Long categoryId) {
         return disposalGuidelineRepository.findByWasteCategoryId(categoryId);
 
     }
+
 
     @Override
     public DisposalGuideline createGuideline(DisposalGuideline disposalGuideline) {
@@ -47,6 +62,7 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
         }
        return disposalGuidelineRepository.save(disposalGuideline);
     }
+
 
     @Override
     public DisposalGuideline updateGuideline(Long guidelineId, DisposalGuideline updatedGuideline) {
@@ -68,15 +84,13 @@ public class DisposalGuidelineSvcImpl implements DisposalGuidelineSvc {
         .orElseThrow(() -> new RuntimeException("Guideline not found with ID: " + guidelineId));
     }
 
+    
     @Override
     public void deleteGuideline(Long guidelineId) {
         if(disposalGuidelineRepository.existsById(guidelineId)) {
             disposalGuidelineRepository.deleteById(guidelineId);
         } else {
             throw new RuntimeException("Disposal Guideline with ID: " + guidelineId + " could not be found");
-
         }
-
     }
-
 }

@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.controller;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,53 +19,56 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
+/**
+ * Controller for handling recycling tip requests
+ * Provides RESTful CRUD endpoints for managing recycling tips,
+ */
 
 
 @RestController
-@RequestMapping("/tips")
+@RequestMapping("/api/tips")
 public class RecyclingTipController {
     private final RecyclingTipSvc recyclingTipSvc;
+
 
     public RecyclingTipController(RecyclingTipSvc recyclingTipSvc) {
         this.recyclingTipSvc = recyclingTipSvc;
     }
 
+
     @GetMapping
     public ResponseEntity<List<RecyclingTip>> getAllRecyclingTips() {
         return ResponseEntity.ok(recyclingTipSvc.getAllRecyclingTips());
-
     }
+
 
     @GetMapping("/{tipId}")
     public ResponseEntity<Optional<RecyclingTip>> getSpecificTip(@PathVariable Long tipId) {
         return ResponseEntity.ok(recyclingTipSvc.getSpecificTip(tipId));
     }
 
+
     @GetMapping("/category/{tipId}")
     public ResponseEntity<List<RecyclingTip>> getTipByCategory(@PathVariable Long tipId) {
         return ResponseEntity.ok(recyclingTipSvc.getTipByCategory(tipId));
     }
 
+
     @PostMapping
     public ResponseEntity<RecyclingTip> createTip(@RequestBody RecyclingTip recyclingTip) {
         return new ResponseEntity<>(recyclingTipSvc.createTip(recyclingTip), HttpStatus.CREATED);
-       
     }
+
 
     @PutMapping("/{tipId}")
     public ResponseEntity<RecyclingTip> updateTip(@PathVariable Long tipId, @RequestBody RecyclingTip recyclingTip) {
         return new ResponseEntity<>(recyclingTipSvc.updateTip(tipId, recyclingTip), HttpStatus.OK);
     }
     
+
     @DeleteMapping("/{tipId}")
     public ResponseEntity<Void> deleteTip(@PathVariable Long tipId) {
         recyclingTipSvc.deleteTip(tipId);
         return ResponseEntity.noContent().build();
     }
-    
-    
-    
-
-
 }

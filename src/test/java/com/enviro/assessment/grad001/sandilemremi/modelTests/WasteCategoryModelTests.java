@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.sandilemremi.modelTests;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import com.enviro.assessment.grad001.sandilemremi.model.DisposalGuideline;
 import com.enviro.assessment.grad001.sandilemremi.model.RecyclingTip;
 import com.enviro.assessment.grad001.sandilemremi.model.WasteCategory;
+
 
 public class WasteCategoryModelTests {
 
