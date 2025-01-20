@@ -1,3 +1,5 @@
+-- Preloaded dummy data
+
 -- sample data for Waste Categories
 INSERT INTO waste_categories (name, description) VALUES
     ('Plastic', 'All types of plastic materials and products.'),
